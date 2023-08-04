@@ -12,10 +12,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class UserLoginService implements UserDetailsService {
+public class AuthServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
-    public UserLoginService(UserRepository userRepository) {
+    public AuthServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
