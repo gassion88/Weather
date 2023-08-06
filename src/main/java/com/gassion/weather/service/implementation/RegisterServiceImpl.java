@@ -9,6 +9,7 @@ import com.gassion.weather.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.Arrays;
 
@@ -26,11 +27,17 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public void saveUser(UserRegisterRequestDTO userRegisterRequestDTO) {
+    public void saveUserOrSetResult(UserRegisterRequestDTO userRegisterRequestDTO, BindingResult result) {
+        User existingUser = findUserByEmail(userRegisterRequestDTO.getEmail());
+        if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
+            result.rejectValue("email", null,
+                    "There is already an account registered with the same email");
+            return;
+        }
+
         User user = new User();
         user.setName(userRegisterRequestDTO.getFirstName() + " " + userRegisterRequestDTO.getLastName());
         user.setEmail(userRegisterRequestDTO.getEmail());
-        // encrypt the password using spring security
         user.setPassword(passwordEncoder.encode(userRegisterRequestDTO.getPassword()));
 
         Role role = roleRepository.findByName("ROLE_ADMIN");
