@@ -1,6 +1,6 @@
 package com.gassion.weather.controller;
 
-import com.gassion.weather.dto.UserDTO;
+import com.gassion.weather.dto.UserRegisterRequestDTO;
 import com.gassion.weather.entity.User;
 import com.gassion.weather.service.RegisterService;
 import jakarta.servlet.ServletException;
@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,27 +48,27 @@ public class AuthController {
 
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
-        model.addAttribute("user", new UserDTO());
+        model.addAttribute("user", new UserRegisterRequestDTO());
         return "register";
     }
 
     @PostMapping("/register/save")
-    public String registration(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result, Model model,
+    public String registration(@Valid @ModelAttribute("user") UserRegisterRequestDTO userRegisterRequestDTO, BindingResult result, Model model,
                                HttpServletRequest request) throws ServletException {
-        User existingUser = registerService.findUserByEmail(userDTO.getEmail());
+        if(result.hasErrors()){
+            model.addAttribute("user", userRegisterRequestDTO);
+            return "/register";
+        }
+
+        User existingUser = registerService.findUserByEmail(userRegisterRequestDTO.getEmail());
 
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");
         }
 
-        if(result.hasErrors()){
-            model.addAttribute("user", userDTO);
-            return "/register";
-        }
-
-        registerService.saveUser(userDTO);
-        request.login(userDTO.getEmail(), userDTO.getPassword());
+        registerService.saveUser(userRegisterRequestDTO);
+        request.login(userRegisterRequestDTO.getEmail(), userRegisterRequestDTO.getPassword());
 
         return "redirect:/";
     }

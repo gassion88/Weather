@@ -1,6 +1,6 @@
 package com.gassion.weather.service.implementation;
 
-import com.gassion.weather.dto.UserDTO;
+import com.gassion.weather.dto.UserRegisterRequestDTO;
 import com.gassion.weather.entity.Role;
 import com.gassion.weather.entity.User;
 import com.gassion.weather.repository.RoleRepository;
@@ -26,12 +26,12 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public void saveUser(UserDTO userDTO) {
+    public void saveUser(UserRegisterRequestDTO userRegisterRequestDTO) {
         User user = new User();
-        user.setName(userDTO.getFirstName() + " " + userDTO.getLastName());
-        user.setEmail(userDTO.getEmail());
+        user.setName(userRegisterRequestDTO.getFirstName() + " " + userRegisterRequestDTO.getLastName());
+        user.setEmail(userRegisterRequestDTO.getEmail());
         // encrypt the password using spring security
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setPassword(passwordEncoder.encode(userRegisterRequestDTO.getPassword()));
 
         Role role = roleRepository.findByName("ROLE_ADMIN");
         if(role == null){

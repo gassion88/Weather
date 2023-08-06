@@ -11,8 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class UserDTO {
-    private Long id;
+public class UserRegisterRequestDTO {
     @NotEmpty
     private String firstName;
     @NotEmpty
