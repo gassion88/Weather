@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -27,16 +28,8 @@ public class AuthController {
     }
 
     @GetMapping("/")
-    public String showHomePage(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if ((!(auth instanceof AnonymousAuthenticationToken)) && auth != null) {
-            UserDetails userDetail = (UserDetails) auth.getPrincipal();
-
-            if (userDetail != null) {
-                model.addAttribute("user", userDetail);
-            }
-        }
-
+    public String showHomePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        model.addAttribute("user", userDetails);
         return "index";
     }
 
