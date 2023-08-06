@@ -36,6 +36,13 @@
     <div class="row">
         <h1 class="text-center"> Registration and Login System </h1>
     </div>
+    <div th:if="${user == null}">
+        <div class="alert alert-danger">Invalid Email or Password</div>
+    </div>
+    <div th:unless="${user == null}">
+        <p th:text="${'id : ' +  user.getUsername()}">VALUE</p>
+        <p>111 </p>
+    </div>
 </div>
 </body>
 </html>

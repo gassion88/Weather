@@ -3,9 +3,15 @@ package com.gassion.weather.controller;
 import com.gassion.weather.dto.UserDTO;
 import com.gassion.weather.entity.User;
 import com.gassion.weather.service.RegisterService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +29,16 @@ public class AuthController {
     }
 
     @GetMapping("/")
-    public String showHopePage() {
+    public String showHomePage(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if ((!(auth instanceof AnonymousAuthenticationToken)) && auth != null) {
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+
+            if (userDetail != null) {
+                model.addAttribute("user", userDetail);
+            }
+        }
+
         return "index";
     }
 
@@ -39,7 +54,8 @@ public class AuthController {
     }
 
     @PostMapping("/register/save")
-    public String registration(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result, Model model){
+    public String registration(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result, Model model,
+                               HttpServletRequest request) throws ServletException {
         User existingUser = registerService.findUserByEmail(userDTO.getEmail());
 
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
@@ -53,6 +69,8 @@ public class AuthController {
         }
 
         registerService.saveUser(userDTO);
-        return "redirect:/register?success";
+        request.login(userDTO.getEmail(), userDTO.getPassword());
+
+        return "redirect:/";
     }
 }
