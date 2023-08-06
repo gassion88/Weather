@@ -1,7 +1,6 @@
 package com.gassion.weather.controller;
 
 import com.gassion.weather.dto.UserRegisterRequestDTO;
-import com.gassion.weather.entity.User;
 import com.gassion.weather.service.RegisterService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -53,21 +52,21 @@ public class AuthController {
     }
 
     @PostMapping("/register/save")
-    public String registration(@Valid @ModelAttribute("user") UserRegisterRequestDTO userRegisterRequestDTO, BindingResult result, Model model,
+    public String registration(@Valid @ModelAttribute("user") UserRegisterRequestDTO userRegisterRequestDTO, BindingResult validateResult, Model model,
                                HttpServletRequest request) throws ServletException {
-        if(result.hasErrors()){
+
+        if(validateResult.hasErrors()){
             model.addAttribute("user", userRegisterRequestDTO);
             return "/register";
         }
 
-        User existingUser = registerService.findUserByEmail(userRegisterRequestDTO.getEmail());
+        registerService.saveUserOrSetResult(userRegisterRequestDTO, validateResult);
 
-        if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
-            result.rejectValue("email", null,
-                    "There is already an account registered with the same email");
+        if(validateResult.hasErrors()){
+            model.addAttribute("user", userRegisterRequestDTO);
+            return "/register";
         }
 
-        registerService.saveUser(userRegisterRequestDTO);
         request.login(userRegisterRequestDTO.getEmail(), userRegisterRequestDTO.getPassword());
 
         return "redirect:/";
