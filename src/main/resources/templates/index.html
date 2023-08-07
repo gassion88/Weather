@@ -19,13 +19,18 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul th:if="${user == null}" class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/register}">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+            <ul th:unless="${user == null}" class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -34,15 +39,9 @@
 <br /><br />
 <div class="container">
     <div class="row">
-        <h1 class="text-center"> Registration and Login System </h1>
+        <h1 class="text-center"> Weather tracking system </h1>
     </div>
-    <div th:if="${user == null}">
-        <div class="alert alert-danger">Invalid Email or Password</div>
-    </div>
-    <div th:unless="${user == null}">
-        <p th:text="${'id : ' +  user.getUsername()}">VALUE</p>
-        <p>111 </p>
-    </div>
+
 </div>
 </body>
 </html>
