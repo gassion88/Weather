@@ -30,6 +30,6 @@ public class Location {
     @Column(name = "latitude")
     private DecimalFormat latitude;
 
-    @Column(name = "latitude")
+    @Column(name = "longitude")
     private DecimalFormat longitude;
 }
