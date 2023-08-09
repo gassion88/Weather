@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  psql-db:
+    image: postgres
+    container_name: psql-db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=WeatherDB
+    ports:
+      - '5432:5432'
+
+  recipe:
+    container_name: recipe_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8080'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/WeatherDB
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - psql-db
