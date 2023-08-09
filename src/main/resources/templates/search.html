@@ -50,7 +50,18 @@
 <section class="search_body">
     <div class="container">
         <div class="row">
-
+            <div th:if="${startString}">
+                <div th:if="${!locations.isEmpty()}">
+                    <br>
+                    <p>Книг не найдено</p>
+                    <br>
+                </div>
+                <div th:each="location : ${locations}">
+                    <br>
+                    <p th:text="${location.getName()} + ', ' + ${location.getCountry()} + ', ' + ${location.getLatitude()} + ', ' + ${location.getLongitude()}">book</p>
+                    <br>
+                </div>
+            </div>
         </div>
     </div>
 </section>
