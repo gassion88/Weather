@@ -37,7 +37,6 @@ public class LocationLoaderServiceImpl implements LocationLoaderService {
 
     @Override
     public List<LocationResponseFromApiDTO> loadByName(String locationName) {
-        System.out.println(BASE_API_URL);
         try {
             URI uri = buildUriForLocationName(locationName);
             HttpRequest request = buildRequestForUriAndApiKey(uri, LOCATION_API_KEY);

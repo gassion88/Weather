@@ -51,9 +51,9 @@
     <div class="container">
         <div class="row">
             <div th:if="${startString}">
-                <div th:if="${!locations.isEmpty()}">
+                <div th:if="${locations.isEmpty()}">
                     <br>
-                    <p>Книг не найдено</p>
+                    <p>Location not found</p>
                     <br>
                 </div>
                 <div th:each="location : ${locations}">
