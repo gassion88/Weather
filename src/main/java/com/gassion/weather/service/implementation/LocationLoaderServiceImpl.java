@@ -1,6 +1,7 @@
 package com.gassion.weather.service.implementation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gassion.weather.dto.LocationResponseFromApiDTO;
 import com.gassion.weather.service.LocationLoaderService;
@@ -41,7 +42,8 @@ public class LocationLoaderServiceImpl implements LocationLoaderService {
             URI uri = buildUriForLocationName(locationName);
             HttpRequest request = buildRequestForUriAndApiKey(uri, LOCATION_API_KEY);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            return objectMapper.readValue(response.body(), new TypeReference<List<LocationResponseFromApiDTO>>(){});
+            objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+            return objectMapper.readValue(response.body(),  new TypeReference<List<LocationResponseFromApiDTO>>(){});
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
