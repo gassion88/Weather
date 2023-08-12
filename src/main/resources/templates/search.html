@@ -58,7 +58,7 @@
                 </div>
                 <div th:each="location : ${locations}">
                     <br>
-                    <p th:text="${location.getName()} + ', ' + ${location.getCountry()} + ', ' + ${location.getLatitude()} + ', ' + ${location.getLongitude()}">book</p>
+                    <p th:text="${location.getName()} + ', ' + ${location.getCountryCode()} + ', ' + ${location.getLatitude()} + ', ' + ${location.getLongitude()}">book</p>
                     <br>
                 </div>
             </div>

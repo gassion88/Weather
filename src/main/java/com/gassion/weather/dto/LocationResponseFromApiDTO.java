@@ -10,12 +10,12 @@ public class LocationResponseFromApiDTO {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("lat")
+    @JsonProperty("latitude")
     private Double latitude;
 
-    @JsonProperty("lon")
+    @JsonProperty("longitude")
     private Double longitude;
 
-    @JsonProperty("country")
-    private String country;
+    @JsonProperty("countryCode")
+    private String countryCode;
 }
