@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface LocationLoaderService {
 
-    List<LocationResponseFromApiDTO> loadByName(String locationName) throws IOException, InterruptedException;
+    List<LocationResponseFromApiDTO> loadByName(String locationName);
 }
