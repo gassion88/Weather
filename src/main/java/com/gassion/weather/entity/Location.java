@@ -22,9 +22,11 @@ public class Location {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "country_code")
+    private String countryCode;
+
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-
     private User userID;
 
     @Column(name = "latitude")
