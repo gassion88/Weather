@@ -9,15 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import java.net.http.HttpClient;
 
 @SpringBootApplication
-public class WeatherApplication extends WebMvcConfigurationSupport {
-
+public class WeatherApplication {
     public static void main(String[] args) {
         SpringApplication.run(WeatherApplication.class, args);
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/");
     }
 }
