@@ -23,7 +23,7 @@ public class SearchController {
     }
 
     @GetMapping
-    public String showSearchResult(@ModelAttribute("startString") String startString, Model model) {
+    public String locationSearch(@ModelAttribute("startString") String startString, Model model) {
         List<LocationResponseFromApiDTO> locations = locationLoaderService.loadByName(startString);
         model.addAttribute("locations", locations);
 
