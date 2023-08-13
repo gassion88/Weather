@@ -27,7 +27,7 @@ public class Location {
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User userID;
+    private User user;
 
     @Column(name = "latitude")
     private DecimalFormat latitude;
