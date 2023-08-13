@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gassion.weather.dto.LocationResponseFromApiDTO;
-import com.gassion.weather.service.LocationLoaderService;
+import com.gassion.weather.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 
 @Service
-public class LocationLoaderServiceImpl implements LocationLoaderService {
+public class LocationServiceImpl implements LocationService {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper;
 
@@ -31,7 +31,7 @@ public class LocationLoaderServiceImpl implements LocationLoaderService {
     private String LOCATION_API_KEY;
 
     @Autowired
-    public LocationLoaderServiceImpl(ObjectMapper objectMapper) {
+    public LocationServiceImpl(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
