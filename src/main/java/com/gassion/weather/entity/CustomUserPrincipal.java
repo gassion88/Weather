@@ -14,7 +14,9 @@ public class CustomUserPrincipal implements UserDetails {
         this.authorities = authorities;
     }
 
-
+    public long getUserId() {
+        return user.getId();
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
