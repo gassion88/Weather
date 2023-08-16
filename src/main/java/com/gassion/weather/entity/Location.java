@@ -34,4 +34,8 @@ public class Location {
 
     @Column(name = "longitude")
     private DecimalFormat longitude;
+
+    public void saveUser(User user) {
+        this.user = user;
+    }
 }
