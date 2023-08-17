@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gassion.weather.dto.LocationResponseFromApiDTO;
+import com.gassion.weather.entity.Location;
+import com.gassion.weather.entity.User;
+import com.gassion.weather.repository.LocationRepository;
 import com.gassion.weather.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +21,7 @@ import java.util.List;
 
 @Service
 public class LocationServiceImpl implements LocationService {
+    private final LocationRepository locationRepository;
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper;
 
@@ -31,7 +35,8 @@ public class LocationServiceImpl implements LocationService {
     private String LOCATION_API_KEY;
 
     @Autowired
-    public LocationServiceImpl(ObjectMapper objectMapper) {
+    public LocationServiceImpl(LocationRepository locationRepository, ObjectMapper objectMapper) {
+        this.locationRepository = locationRepository;
         this.objectMapper = objectMapper;
     }
 
@@ -46,6 +51,12 @@ public class LocationServiceImpl implements LocationService {
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Location saveUserToLocation(Location newLocation, User user) {
+        newLocation.saveUser(user);
+        return locationRepository.save(newLocation);
     }
 
     private static HttpRequest buildRequestForUriAndApiKey(URI uri, String locationApiKey) {
