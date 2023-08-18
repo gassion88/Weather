@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,12 +27,20 @@ public class Location {
     @Column(name = "country_code")
     private String countryCode;
 
-    @ManyToMany(mappedBy = "locations")
-    private List<User> users;
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
+    @JoinTable(
+            name="users_locations",
+            joinColumns={@JoinColumn(name="LOCATION_ID", referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")})
+    private List<User> users = new ArrayList<>();
 
     @Column(name = "latitude")
     private DecimalFormat latitude;
 
     @Column(name = "longitude")
     private DecimalFormat longitude;
+
+    public void addUserToLocation(User user) {
+        this.users.add(user);
+    }
 }

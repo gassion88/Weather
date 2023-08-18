@@ -11,6 +11,7 @@ import com.gassion.weather.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.net.URI;
@@ -55,7 +56,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location saveUserToLocation(Location newLocation, User user) {
-        newLocation.saveUser(user);
+        newLocation.addUserToLocation(user);
         return locationRepository.save(newLocation);
     }
 
