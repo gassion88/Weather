@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 @Entity
 @Table(name = "location")
@@ -25,17 +26,12 @@ public class Location {
     @Column(name = "country_code")
     private String countryCode;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @ManyToMany(mappedBy = "locations")
+    private List<User> users;
 
     @Column(name = "latitude")
     private DecimalFormat latitude;
 
     @Column(name = "longitude")
     private DecimalFormat longitude;
-
-    public void saveUser(User user) {
-        this.user = user;
-    }
 }
