@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("location")
@@ -30,6 +28,12 @@ public class LocationController {
         User user = ((CustomUserPrincipal) userDetails).getUser();
         locationService.saveUserToLocation(location, user);
 
+        return "search";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteLocation(@PathVariable("id") Integer locationId) {
+        locationService.deleteLocationFromId(locationId);
         return "search";
     }
 }
