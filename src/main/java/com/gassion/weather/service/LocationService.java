@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface LocationService {
     List<LocationResponseFromApiDTO> loadByName(String locationName);
-
     Location saveUserToLocation(Location newLocation, User user);
+    void markSavedLocation(List<LocationResponseFromApiDTO> locations, long userId);
 }
