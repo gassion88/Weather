@@ -71,7 +71,7 @@
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                             <div th:if="${location.isSaved()}">
-                                <button type="submit" class="btn btn-primary">Delete</button>
+                                <a th:href="@{/location/{id}/delete(id=${location.getId()})}" class="btn btn-primary">Delete</a>
                             </div>
                         </div>
                     </form>

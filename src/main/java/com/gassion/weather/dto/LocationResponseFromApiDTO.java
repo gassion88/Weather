@@ -22,4 +22,6 @@ public class LocationResponseFromApiDTO {
     private String countryCode;
 
     private boolean isSaved;
+
+    private Integer id;
 }

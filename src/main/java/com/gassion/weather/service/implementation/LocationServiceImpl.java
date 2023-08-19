@@ -18,6 +18,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -62,7 +63,10 @@ public class LocationServiceImpl implements LocationService {
 
     public void markSavedLocation(List<LocationResponseFromApiDTO> locations, long userId) {
         for (LocationResponseFromApiDTO location : locations) {
-            if (isLocationSaved(location, userId)) {
+
+            Optional<Location> locationOptional = getLocationIfIsSaved(location, userId);
+            if (locationOptional.isPresent()) {
+                location.setId(locationOptional.get().getId());
                 location.setSaved(true);
             }
         }
@@ -80,8 +84,8 @@ public class LocationServiceImpl implements LocationService {
         return URI.create(BASE_API_URL + LOCATION_SUFFIX_URL + "?searchTerm=" + locationName);
     }
 
-    private boolean isLocationSaved(LocationResponseFromApiDTO location, Long userId) {
-        return locationRepository.findByNameAndCountryCodeAndUserId(location.getName(), location.getCountryCode(), userId).isPresent();
+    private Optional<Location> getLocationIfIsSaved(LocationResponseFromApiDTO location, Long userId) {
+        return locationRepository.findByNameAndCountryCodeAndUserId(location.getName(), location.getCountryCode(), userId);
     }
 
 }
