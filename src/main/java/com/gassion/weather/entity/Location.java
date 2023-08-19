@@ -16,14 +16,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@IdClass(LocationId.class)
 public class Location {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     @Column(name = "name")
     private String name;
 
+    @Id
     @Column(name = "country_code")
     private String countryCode;
 
@@ -39,6 +38,9 @@ public class Location {
 
     @Column(name = "longitude")
     private DecimalFormat longitude;
+
+    @Transient
+    private boolean isSaved;
 
     public void addUserToLocation(User user) {
         this.users.add(user);
