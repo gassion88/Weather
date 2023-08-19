@@ -47,7 +47,8 @@ public class LocationServiceImpl implements LocationService {
             HttpRequest request = buildRequestForUriAndApiKey(uri, LOCATION_API_KEY);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-            return objectMapper.readValue(response.body(),  new TypeReference<List<LocationResponseFromApiDTO>>(){});
+            return objectMapper.readValue(response.body(), new TypeReference<List<LocationResponseFromApiDTO>>() {
+            });
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -55,8 +56,16 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location saveUserToLocation(Location newLocation, User user) {
-        newLocation.addUserToLocation(user);
+        newLocation.setUser(user);
         return locationRepository.save(newLocation);
+    }
+
+    public void markSavedLocation(List<LocationResponseFromApiDTO> locations, long userId) {
+        for (LocationResponseFromApiDTO location : locations) {
+            if (isLocationSaved(location, userId)) {
+                location.setSaved(true);
+            }
+        }
     }
 
     private static HttpRequest buildRequestForUriAndApiKey(URI uri, String locationApiKey) {
@@ -68,6 +77,11 @@ public class LocationServiceImpl implements LocationService {
     }
 
     private URI buildUriForLocationName(String locationName) {
-        return URI.create(BASE_API_URL+LOCATION_SUFFIX_URL + "?searchTerm=" + locationName);
+        return URI.create(BASE_API_URL + LOCATION_SUFFIX_URL + "?searchTerm=" + locationName);
     }
+
+    private boolean isLocationSaved(LocationResponseFromApiDTO location, Long userId) {
+        return locationRepository.findByNameAndCountryCodeAndUserId(location.getName(), location.getCountryCode(), userId).isPresent();
+    }
+
 }
