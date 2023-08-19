@@ -36,7 +36,6 @@ public class User {
             inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
     private List<Role> roles = new ArrayList<>();
 
-
-    @ManyToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     private List<Location> locations;
 }
