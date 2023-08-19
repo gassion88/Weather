@@ -56,6 +56,11 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    public void deleteLocationFromId(Integer id) {
+        locationRepository.deleteById(id);
+    }
+
+    @Override
     public Location saveUserToLocation(Location newLocation, User user) {
         newLocation.setUser(user);
         return locationRepository.save(newLocation);
@@ -87,5 +92,4 @@ public class LocationServiceImpl implements LocationService {
     private Optional<Location> getLocationIfIsSaved(LocationResponseFromApiDTO location, Long userId) {
         return locationRepository.findByNameAndCountryCodeAndUserId(location.getName(), location.getCountryCode(), userId);
     }
-
 }
