@@ -24,16 +24,16 @@ public class LocationController {
     }
 
     @PostMapping("/save")
-    public String saveLocation(@ModelAttribute("newLocation") Location location, @AuthenticationPrincipal UserDetails userDetails) {
+    public String saveLocation(@ModelAttribute("newLocation") Location location, @AuthenticationPrincipal UserDetails userDetails, @RequestParam("startString") String startString) {
         User user = ((CustomUserPrincipal) userDetails).getUser();
         locationService.saveUserToLocation(location, user);
 
-        return "redirect:/search";
+        return "redirect:/search?startString=" + startString;
     }
 
     @GetMapping("/{id}/delete")
-    public String deleteLocation(@PathVariable("id") Integer locationId) {
+    public String deleteLocation(@PathVariable("id") Integer locationId, @ModelAttribute("startString") String startString) {
         locationService.deleteLocationFromId(locationId);
-        return "redirect:/search";
+        return "search";
     }
 }
