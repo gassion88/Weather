@@ -28,12 +28,12 @@ public class LocationController {
         User user = ((CustomUserPrincipal) userDetails).getUser();
         locationService.saveUserToLocation(location, user);
 
-        return "search";
+        return "redirect:/search";
     }
 
     @GetMapping("/{id}/delete")
     public String deleteLocation(@PathVariable("id") Integer locationId) {
         locationService.deleteLocationFromId(locationId);
-        return "search";
+        return "redirect:/search";
     }
 }
