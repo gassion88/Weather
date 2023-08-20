@@ -31,8 +31,8 @@ public class Location {
     private User user;
 
     @Column(name = "latitude")
-    private DecimalFormat latitude;
+    private Double latitude;
 
     @Column(name = "longitude")
-    private DecimalFormat longitude;
+    private Double longitude;
 }
