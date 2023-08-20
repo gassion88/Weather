@@ -17,6 +17,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,6 +76,11 @@ public class LocationServiceImpl implements LocationService {
                 location.setSaved(true);
             }
         }
+    }
+
+    @Override
+    public List<Location> getAllUserLocation(User user) {
+        return locationRepository.findAllByUser(user).orElse(Collections.emptyList());
     }
 
     private static HttpRequest buildRequestForUriAndApiKey(URI uri, String locationApiKey) {
