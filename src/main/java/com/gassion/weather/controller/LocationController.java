@@ -34,6 +34,6 @@ public class LocationController {
     @GetMapping("/{id}/delete")
     public String deleteLocation(@PathVariable("id") Integer locationId, @ModelAttribute("startString") String startString) {
         locationService.deleteLocationFromId(locationId);
-        return "search";
+        return "index";
     }
 }
