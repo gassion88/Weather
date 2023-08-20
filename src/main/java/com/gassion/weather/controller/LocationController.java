@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("location")
@@ -34,6 +37,15 @@ public class LocationController {
     @GetMapping("/{id}/delete")
     public String deleteLocation(@PathVariable("id") Integer locationId, @ModelAttribute("startString") String startString) {
         locationService.deleteLocationFromId(locationId);
-        return "index";
+        return "redirect:/";
+    }
+
+    @GetMapping("/saved")
+    public String viewSavedLocations(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User user = ((CustomUserPrincipal) userDetails).getUser();
+        List<Location> locations = locationService.getAllUserLocation(user);
+        model.addAttribute("locations", locations);
+
+        return "saved_locations";
     }
 }
