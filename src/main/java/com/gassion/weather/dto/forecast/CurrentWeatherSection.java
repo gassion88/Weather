@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CurrentWeather {
+public class CurrentWeatherSection {
     @JsonProperty("temp")
     private double temp;
 
