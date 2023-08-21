@@ -1,4 +1,4 @@
 package com.gassion.weather.dto;
 
-public class ForecastApiResponce {
+public class ForecastApiResponse {
 }
