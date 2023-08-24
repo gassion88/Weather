@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,5 +18,5 @@ public class ForecastApiResponse {
     private CurrentWeather currentWeather;
 
     @JsonProperty("forecasts")
-    private Forecast forecast;
+    private List<Forecast> forecast;
 }
