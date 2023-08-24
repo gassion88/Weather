@@ -11,6 +11,7 @@ import com.gassion.weather.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.io.IOException;
 import java.net.URI;
@@ -80,6 +81,17 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public List<Location> getAllUserLocation(User user) {
         return locationRepository.findAllByUser(user).orElse(Collections.emptyList());
+    }
+
+    @Override
+    public Location getById(Integer id, BindingResult result) {
+        Optional<Location> location = locationRepository.findById(id);
+
+        if(location.isEmpty()) {
+            System.out.println("Error");
+        }
+
+        return location.get();
     }
 
     private static HttpRequest buildRequestForUriAndApiKey(URI uri, String locationApiKey) {
