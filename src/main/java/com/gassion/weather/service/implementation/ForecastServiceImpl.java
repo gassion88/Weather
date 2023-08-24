@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gassion.weather.dto.forecast.ForecastApiResponse;
 import com.gassion.weather.service.ForecastService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -13,6 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+@Service
 public class ForecastServiceImpl implements ForecastService {
     @Value("${api.forecast.url}")
     private String API_URL;
