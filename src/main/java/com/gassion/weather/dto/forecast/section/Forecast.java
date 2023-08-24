@@ -13,13 +13,13 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Forecast {
     @JsonProperty("date")
-    private Date dateTime;
+    private String dateTime;
 
     @JsonProperty("sunrise")
-    private Date rise;
+    private String rise;
 
     @JsonProperty("sunset")
-    private Date sunset;
+    private String sunset;
 
     @JsonProperty("moon_code")
     private String moonPhase;
