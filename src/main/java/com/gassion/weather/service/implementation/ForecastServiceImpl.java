@@ -35,8 +35,7 @@ public class ForecastServiceImpl implements ForecastService {
             HttpRequest request = buildRequestForUriAndApiKey(uri, FORECAST_API_KEY);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-            return objectMapper.readValue(response.body(), new TypeReference<ForecastApiResponse>() {
-            });
+            return objectMapper.readValue(response.body(), new TypeReference<ForecastApiResponse>() {});
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }

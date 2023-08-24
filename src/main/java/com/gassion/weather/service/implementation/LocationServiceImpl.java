@@ -49,8 +49,7 @@ public class LocationServiceImpl implements LocationService {
             HttpRequest request = buildRequestForUriAndApiKey(uri, LOCATION_API_KEY);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-            return objectMapper.readValue(response.body(), new TypeReference<List<LocationResponseFromApiDTO>>() {
-            });
+            return objectMapper.readValue(response.body(), new TypeReference<List<LocationResponseFromApiDTO>>() {});
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
