@@ -62,9 +62,9 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Location saveUserToLocation(Location newLocation, User user) {
+    public void saveUserToLocation(Location newLocation, User user) {
         newLocation.setUser(user);
-        return locationRepository.save(newLocation);
+        locationRepository.save(newLocation);
     }
 
     public void markSavedLocation(List<LocationResponseFromApiDTO> locations, long userId) {

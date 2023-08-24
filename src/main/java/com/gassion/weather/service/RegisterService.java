@@ -6,6 +6,5 @@ import org.springframework.validation.BindingResult;
 
 public interface RegisterService {
     void saveUserOrSetResult(UserRegisterRequestDTO userRegisterRequestDTO, BindingResult result);
-
     User findUserByEmail(String email);
 }
