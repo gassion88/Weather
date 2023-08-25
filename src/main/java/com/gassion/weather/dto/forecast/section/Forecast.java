@@ -6,7 +6,6 @@ import com.gassion.weather.dto.forecast.section.parts.PartForecast;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
 
 @Getter
 @Setter
