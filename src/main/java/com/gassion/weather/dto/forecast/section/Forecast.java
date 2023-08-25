@@ -52,7 +52,7 @@ public class Forecast {
     private int precType;
 
     @JsonProperty("cloudness")
-    private int cloudness;
+    private double cloudness;
 
     @JsonProperty("hour")
     private String hour;

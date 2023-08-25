@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Part {
+    @JsonProperty("temp")
+    private int temp;
     @JsonProperty("temp_min")
     private int tempMin;
 
@@ -34,7 +36,7 @@ public class Part {
     private boolean polar;
 
     @JsonProperty("wind_speed")
-    private int windSpeed;
+    private double windSpeed;
 
     @JsonProperty("pressure_mm")
     private int pressureMM;
@@ -43,5 +45,5 @@ public class Part {
     private int humidity;
 
     @JsonProperty("cloudness")
-    private int cloudness;
+    private double cloudness;
 }
