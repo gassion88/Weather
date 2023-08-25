@@ -40,6 +40,8 @@
             <h5 th:text="${location.getName()}" class="card-title"></h5>
             <p th:text="${location.getName() + ', ' + location.getCountryCode() + ', ' + location.getLongitude() + ':' + location.getLatitude()}" class="card-text"></p>
           </div>
+          <a th:href="@{/forecast/{id}(id=${location.getId()})}" type="button" class="btn btn-primary">View Forecast</a>
+        <br>
           <a th:href="@{/location/{id}/delete(id=${location.getId()})}" type="button" class="btn btn-primary">Delete</a>
       </div>
     </div>
