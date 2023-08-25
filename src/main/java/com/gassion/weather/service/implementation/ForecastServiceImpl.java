@@ -32,13 +32,13 @@ public class ForecastServiceImpl implements ForecastService {
     }
 
     @Override
-    public List<ForecastApiResponse> loadForecastByCoordinates(String lat, String lon) {
+    public ForecastApiResponse loadForecastByCoordinates(String lat, String lon) {
         try {
             URI uri = buildUriForCoordinates(lat, lon);
             HttpRequest request = buildRequestForUriAndApiKey(uri, FORECAST_API_KEY);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-            return objectMapper.readValue(response.body(), new TypeReference<List<ForecastApiResponse>>() {});
+            return objectMapper.readValue(response.body(), new TypeReference<List<ForecastApiResponse>>() {}).get(0);
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }

@@ -6,5 +6,5 @@ import com.gassion.weather.dto.forecast.ForecastApiResponse;
 import java.util.List;
 
 public interface ForecastService {
-    List<ForecastApiResponse> loadForecastByCoordinates(String lot, String lon);
+    ForecastApiResponse loadForecastByCoordinates(String lot, String lon);
 }
