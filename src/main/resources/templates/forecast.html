@@ -11,14 +11,14 @@
 <div class="weather">
     <div class="weather__inner">
         <div class="current">
-            <div class="current__city"> Москва </div>
-            <div class="current__description"> ясно </div>
-            <div class="current__temperature"> 22</div>
+            <div th:text="${location.name}" class="current__city"> City </div>
+            <div th:text="${locationForecast.getCurrentWeather().getCondition()}" class="current__description"> Condition </div>
+            <div th:text="${locationForecast.getCurrentWeather().getTemp()}" class="current__temperature"> Temp</div>
         </div>
 
         <div class="forecast">
             <div class="forecast__item">
-                <div class="forecast__time">Сейчас</div>
+                <div class="forecast__time">Now</div>
                 <div class="forecast__icon icon__01d"></div>
                 <div class="forecast__temperature"> 12˚</div>
             </div>
@@ -45,6 +45,18 @@
                 <div class="forecast__time"> 03 </div>
                 <div class="forecast__icon icon__02d"></div>
                 <div class="forecast__temperature"> 3˚</div>
+            </div>
+
+            <div class="forecast__item">
+                <div class="forecast__time"> 04 </div>
+                <div class="forecast__icon icon__02d"></div>
+                <div class="forecast__temperature"> 2˚</div>
+            </div>
+
+            <div class="forecast__item">
+                <div class="forecast__time"> 04 </div>
+                <div class="forecast__icon icon__02d"></div>
+                <div class="forecast__temperature"> 2˚</div>
             </div>
 
             <div class="forecast__item">
