@@ -27,10 +27,11 @@ public class ForecastController {
     @GetMapping("/{location_id}")
     public String loadLocationForecast(@PathVariable int location_id, Model model) {
         Location location = locationService.getById(location_id, null);
-        String locationLatitude = location.getLatitude().toString();
-        String locationLongitude = location.getLongitude().toString();
+        ForecastApiResponse forecastApiResponse = forecastService.loadForecastByCoordinates(
+                location.getLatitude().toString(),
+                location.getLongitude().toString());
 
-        ForecastApiResponse forecastApiResponse = forecastService.loadForecastByCoordinates(locationLatitude, locationLongitude);
+        model.addAttribute("location", location);
         model.addAttribute("locationForecast", forecastApiResponse);
         return "forecast";
     }
