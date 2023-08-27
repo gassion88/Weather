@@ -11,9 +11,9 @@
 <div class="weather">
     <div class="weather__inner">
         <div class="current">
-            <div th:text="${location.name}" class="current__city"> City </div>
-            <div th:text="${locationForecast.getCurrentWeather().getCondition()}" class="current__description"> Condition </div>
-            <div th:text="${locationForecast.getCurrentWeather().getTemp()}" class="current__temperature"> Temp</div>
+            <div th:text="${current.locationName}" class="current__city"> City </div>
+            <div th:text="${current.getCondition()}" class="current__description"> Condition </div>
+            <div th:text="${current.getTemp()}" class="current__temperature"> Temp</div>
         </div>
 
         <div class="forecast">

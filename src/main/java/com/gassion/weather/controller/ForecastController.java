@@ -1,5 +1,6 @@
 package com.gassion.weather.controller;
 
+import com.gassion.weather.dto.forecast.CurrentWeatherDTO;
 import com.gassion.weather.dto.forecast.ForecastApiResponse;
 import com.gassion.weather.entity.Location;
 import com.gassion.weather.service.ForecastService;
@@ -31,8 +32,10 @@ public class ForecastController {
                 location.getLatitude().toString(),
                 location.getLongitude().toString());
 
-        model.addAttribute("location", location);
-        model.addAttribute("locationForecast", forecastApiResponse);
+        CurrentWeatherDTO currentWeather = forecastService.getCurrentWeather(forecastApiResponse, location.getName());
+
+        model.addAttribute("current", currentWeather);
+        model.addAttribute("forecast", forecastApiResponse);
         return "forecast";
     }
 }
