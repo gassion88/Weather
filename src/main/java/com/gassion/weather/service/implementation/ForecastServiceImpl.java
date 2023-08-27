@@ -3,6 +3,7 @@ package com.gassion.weather.service.implementation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gassion.weather.dto.forecast.CurrentWeatherDTO;
 import com.gassion.weather.dto.forecast.ForecastApiResponse;
 import com.gassion.weather.service.ForecastService;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,6 +43,11 @@ public class ForecastServiceImpl implements ForecastService {
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public CurrentWeatherDTO getCurrentWeather(ForecastApiResponse forecastApiResponse, String locationName) {
+        return new CurrentWeatherDTO(locationName, forecastApiResponse.getCurrentWeather().getCondition(), forecastApiResponse.getCurrentWeather().getTemp());
     }
 
     private static HttpRequest buildRequestForUriAndApiKey(URI uri, String forecastApiKey) {
