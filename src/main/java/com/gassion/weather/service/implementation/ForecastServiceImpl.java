@@ -5,6 +5,10 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gassion.weather.dto.forecast.CurrentWeatherDTO;
 import com.gassion.weather.dto.forecast.ForecastApiResponse;
+import com.gassion.weather.dto.forecast.ToDayForecastDTO;
+import com.gassion.weather.dto.forecast.section.Forecast;
+import com.gassion.weather.dto.forecast.section.ToDayForecastPart;
+import com.gassion.weather.dto.forecast.section.parts.Hour;
 import com.gassion.weather.service.ForecastService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -48,6 +55,39 @@ public class ForecastServiceImpl implements ForecastService {
     @Override
     public CurrentWeatherDTO getCurrentWeather(ForecastApiResponse forecastApiResponse, String locationName) {
         return new CurrentWeatherDTO(locationName, forecastApiResponse.getCurrentWeather().getCondition(), forecastApiResponse.getCurrentWeather().getTemp());
+    }
+
+    @Override
+    public ToDayForecastDTO getToDayForecast(ForecastApiResponse forecastApiResponse) {
+        ToDayForecastDTO toDayForecastDTO = new ToDayForecastDTO();
+
+        Instant instant = Instant.now();
+        ZoneId z = ZoneId.of( "Europe/Moscow" );
+        ZonedDateTime zdt = instant.atZone(z);
+        int currentHour = zdt.getHour();
+
+        int hoursCount = 0;
+
+
+        for(Forecast forecastDays : forecastApiResponse.getForecast()) {
+            if(hoursCount == 8) break;
+
+            for(Hour hour : forecastDays.getHours()) {
+                int hourInForecast = Integer.parseInt(hour.getHour());
+                if(hoursCount == 0 && hourInForecast <= currentHour) continue;
+                   toDayForecastDTO.getHourlyForecast().add(
+                           new ToDayForecastPart(
+                            Long.toString(hourInForecast),
+                            hour.getCondition(),
+                            Integer.toString(hour.getTemp())
+                           ));
+                   hoursCount++;
+
+                if(hoursCount == 8) break;
+            }
+        }
+
+        return toDayForecastDTO;
     }
 
     private static HttpRequest buildRequestForUriAndApiKey(URI uri, String forecastApiKey) {
