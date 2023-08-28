@@ -12,6 +12,9 @@ public class Hour {
     @JsonProperty("hour")
     private String hour;
 
+    @JsonProperty("hour_ts")
+    private long unixTime;
+
     @JsonProperty("temp")
     private int temp;
 
