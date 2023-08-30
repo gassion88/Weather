@@ -37,7 +37,7 @@ public class ForecastController {
         ToDayForecastDTO toDayForecastDTO = forecastService.getToDayForecast(forecastApiResponse);
 
         model.addAttribute("current", currentWeather);
-        model.addAttribute("forecast", toDayForecastDTO);
+        model.addAttribute("forecasts", toDayForecastDTO);
         return "forecast";
     }
 }
