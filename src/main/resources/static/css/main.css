@@ -106,70 +106,72 @@ html.transition * {
     transition-delay: 0 !important;
 }
 
-.icon__01d,
-.icon__01n,
-.icon__02d,
-.icon__02n,
-.icon__03d,
-.icon__03n,
-.icon__04d,
-.icon__04n,
-.icon__09d,
-.icon__09n,
-.icon__10d,
-.icon__10n,
-.icon__11n,
-.icon__11n,
-.icon__13d,
-.icon__13n,
-.icon__50d,
-.icon__50n {
+.forecast__icon {
     background-size: 50px;
     background-repeat: no-repeat;
 }
 
-.icon__01d,
-.icon__01n {
-    background-image: url("/img/01d.png");
+.clear {
+    background-image: url("/img/clear.png");
 }
 
-.icon__02d,
-.icon__02n {
-    background-image: url("/img/02d.png");
+.cloudy {
+    background-image: url("/img/cloudy.png");
 }
 
-.icon__03d,
-.icon__03n {
-    background-image: url("/img/03d.png");
+.hail {
+    background-image: url("/img/hail.png");
 }
 
-.icon__04d,
-.icon__04n {
-    background-image: url("/img/04d.png");
+.heavy-rain {
+    background-image: url("/img/heavy-rain.png");
 }
 
-.icon__09d,
-.icon__09n {
-    background-image: url("/img/09d.png");
+.light-rain {
+    background-image: url("/img/light-snow.png");
 }
 
-.icon__10d,
-.icon__10n {
-    background-image: url("/img/10d.png");
+.light-snow {
+    background-image: url("/img/light-snow.png");
 }
 
-.icon__11n,
-.icon__11n {
-    background-image: url("/img/11d.png");
+.overcast {
+    background-image: url("/img/overcast.png");
 }
 
-.icon__13d,
-.icon__13n {
-    background-image: url("/img/13d.png");
+.partly-cloudy {
+    background-image: url("/img/partly-cloudy.png");
 }
 
-.icon__50d,
-.icon__50n {
-    background-image: url("/img/50d.png");
+.rain {
+    background-image: url("/img/rain.png");
+}
+
+.showers {
+    background-image: url("/img/showers.png");
+}
+
+.snow {
+    background-image: url("/img/snow.png");
+}
+
+.snow-showers {
+    background-image: url("/img/snow-showers.png");
+}
+
+.thunderstorm {
+    background-image: url("/img/thunderstorm.png");
+}
+
+.thunderstorm-with-hail {
+    background-image: url("/img/thunderstorm-with-hail.png");
+}
+
+.thunderstorm-witn-rain {
+    background-image: url("/img/thunderstorm-witn-rain.png");
+}
+
+.wet-snow {
+    background-image: url("/img/wet-snow.png");
 }
 /*# sourceMappingURL=main.css.map */
