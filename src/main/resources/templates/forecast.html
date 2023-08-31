@@ -17,52 +17,10 @@
         </div>
 
         <div class="forecast">
-            <div class="forecast__item">
-                <div class="forecast__time">Now</div>
+            <div th:each="forecast : ${forecasts.getHourlyForecast()}" class="forecast__item">
+                <div th:text="${forecast.getTime()}" class="forecast__time">Time</div>
                 <div class="forecast__icon icon__01d"></div>
-                <div class="forecast__temperature"> 12˚</div>
-            </div>
-
-            <div class="forecast__item">
-                <div class="forecast__time"> 00 </div>
-                <div class="forecast__icon icon__01d"></div>
-                <div class="forecast__temperature"> 4˚</div>
-            </div>
-
-            <div class="forecast__item">
-                <div class="forecast__time"> 01 </div>
-                <div class="forecast__icon icon__04d"></div>
-                <div class="forecast__temperature"> 4˚</div>
-            </div>
-
-            <div class="forecast__item">
-                <div class="forecast__time"> 02 </div>
-                <div class="forecast__icon icon__04d"></div>
-                <div class="forecast__temperature"> 3˚</div>
-            </div>
-
-            <div class="forecast__item">
-                <div class="forecast__time"> 03 </div>
-                <div class="forecast__icon icon__02d"></div>
-                <div class="forecast__temperature"> 3˚</div>
-            </div>
-
-            <div class="forecast__item">
-                <div class="forecast__time"> 04 </div>
-                <div class="forecast__icon icon__02d"></div>
-                <div class="forecast__temperature"> 2˚</div>
-            </div>
-
-            <div class="forecast__item">
-                <div class="forecast__time"> 04 </div>
-                <div class="forecast__icon icon__02d"></div>
-                <div class="forecast__temperature"> 2˚</div>
-            </div>
-
-            <div class="forecast__item">
-                <div class="forecast__time"> 04 </div>
-                <div class="forecast__icon icon__02d"></div>
-                <div class="forecast__temperature"> 2˚</div>
+                <div th:text="${forecast.getTemp()}" class="forecast__temperature"> Temp</div>
             </div>
         </div>
 
