@@ -19,7 +19,7 @@
         <div class="forecast">
             <div th:each="forecast : ${forecasts.getHourlyForecast()}" class="forecast__item">
                 <div th:text="${forecast.getTime()}" class="forecast__time">Time</div>
-                <div class="forecast__icon icon__01d"></div>
+                <div th:classappend="${forecast.getCondition()}" class="forecast__icon"></div>
                 <div th:text="${forecast.getTemp()}" class="forecast__temperature"> Temp</div>
             </div>
         </div>
