@@ -18,6 +18,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -66,20 +67,22 @@ public class ForecastServiceImpl implements ForecastService {
         ZonedDateTime zdt = instant.atZone(z);
         int currentHour = zdt.getHour();
 
+        DecimalFormat formatter = new DecimalFormat("00");
         int hoursCount = 0;
-
 
         for(Forecast forecastDays : forecastApiResponse.getForecast()) {
             if(hoursCount == 8) break;
 
             for(Hour hour : forecastDays.getHours()) {
                 int hourInForecast = Integer.parseInt(hour.getHour());
+
                 if(hoursCount == 0 && hourInForecast <= currentHour) continue;
+
                    toDayForecastDTO.getHourlyForecast().add(
                            new ToDayForecastPart(
-                            Long.toString(hourInForecast),
-                            hour.getCondition(),
-                            Integer.toString(hour.getTemp())
+                                   formatter.format(hourInForecast) + ":00",
+                                   hour.getCondition(),
+                                   hour.getTemp() + "˚"
                            ));
                    hoursCount++;
 
