@@ -41,9 +41,6 @@
 </nav>
 <br /><br />
 <div class="container">
-    <div class="row">
-        <h1 class="text-center"> Weather tracking system </h1>
-    </div>
     <div th:unless="${user == null}" class="row">
         <div class="col-md-8 col-sm-6">
             <form th:method="GET" th:action="@{search}">
