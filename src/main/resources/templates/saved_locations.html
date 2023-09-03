@@ -22,10 +22,10 @@
     <div  class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+          <a class="nav-link active" aria-current="page" th:href="@{/location/saved}">Saved location</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/location/saved}">Saved location</a>
+          <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
         </li>
       </ul>
     </div>
@@ -34,8 +34,8 @@
 <br /><br />
   <div class="container">
     <div class="row">
-      <div th:each="location : ${locations}"  class="card" style="width: 18rem;">
-          <img src="/img/weather.jpg" class="card-img-top" alt="...">
+      <div th:each="location : ${locations}"  class="card" style="width: 18rem; margin: 5px">
+          <img src="/img/weather.jpg" class="card-img-top" alt="..." style="padding-top: 5px">
           <div class="card-body d-grid">
             <h5 th:text="${location.getName()}" class="card-title"></h5>
             <p th:text="${location.getName() + ', ' + location.getCountryCode() + ', ' + location.getLongitude() + ':' + location.getLatitude()}" class="card-text"></p>
