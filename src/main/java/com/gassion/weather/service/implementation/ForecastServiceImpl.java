@@ -55,7 +55,13 @@ public class ForecastServiceImpl implements ForecastService {
 
     @Override
     public CurrentWeatherDTO getCurrentWeather(ForecastApiResponse forecastApiResponse, String locationName) {
-        return new CurrentWeatherDTO(locationName, forecastApiResponse.getCurrentWeather().getCondition(), forecastApiResponse.getCurrentWeather().getTemp());
+        return new CurrentWeatherDTO(
+                locationName,
+                forecastApiResponse.getCurrentWeather().getCondition(),
+                forecastApiResponse.getCurrentWeather().getTemp(), forecastApiResponse.getCurrentWeather().getFeelsLike(),
+                forecastApiResponse.getCurrentWeather().getPressureMM(),
+                forecastApiResponse.getCurrentWeather().getWindSpeed(),
+                forecastApiResponse.getCurrentWeather().getHumidity());
     }
 
     @Override

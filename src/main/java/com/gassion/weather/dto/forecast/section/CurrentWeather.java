@@ -12,6 +12,9 @@ public class CurrentWeather {
     @JsonProperty("temp")
     private double temp;
 
+    @JsonProperty("feels_like")
+    private double feelsLike;
+
     @JsonProperty("name")
     private String icon;
 
