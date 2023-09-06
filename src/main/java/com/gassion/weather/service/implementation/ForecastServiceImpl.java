@@ -10,6 +10,7 @@ import com.gassion.weather.dto.forecast.section.Forecast;
 import com.gassion.weather.dto.forecast.section.ToDayForecastPart;
 import com.gassion.weather.dto.forecast.section.parts.Hour;
 import com.gassion.weather.service.ForecastService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ForecastServiceImpl implements ForecastService {
     @Value("${api.forecast.url}")
     private String API_URL;
@@ -34,11 +36,6 @@ public class ForecastServiceImpl implements ForecastService {
 
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
-
-    public ForecastServiceImpl() {
-        this.objectMapper = new ObjectMapper();
-        this.httpClient = HttpClient.newHttpClient();
-    }
 
     @Override
     public ForecastApiResponse loadForecastByCoordinates(String lat, String lon) {
