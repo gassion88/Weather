@@ -8,6 +8,7 @@ import com.gassion.weather.entity.Location;
 import com.gassion.weather.entity.User;
 import com.gassion.weather.repository.LocationRepository;
 import com.gassion.weather.service.LocationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
     private final LocationRepository locationRepository;
-    private final HttpClient httpClient = HttpClient.newHttpClient();
+    private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
     @Value("${api.location.url}")
@@ -36,12 +38,6 @@ public class LocationServiceImpl implements LocationService {
 
     @Value("${api.location.key}")
     private String LOCATION_API_KEY;
-
-    @Autowired
-    public LocationServiceImpl(LocationRepository locationRepository, ObjectMapper objectMapper) {
-        this.locationRepository = locationRepository;
-        this.objectMapper = objectMapper;
-    }
 
     @Override
     public List<LocationResponseFromApiDTO> loadByName(String locationName) {
