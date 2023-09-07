@@ -4,6 +4,7 @@ import com.gassion.weather.entity.CustomUserPrincipal;
 import com.gassion.weather.entity.Role;
 import com.gassion.weather.entity.User;
 import com.gassion.weather.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,12 +16,9 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
-
-    public AuthServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String email) {

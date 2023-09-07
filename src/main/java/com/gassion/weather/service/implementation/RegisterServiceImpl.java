@@ -6,6 +6,7 @@ import com.gassion.weather.entity.User;
 import com.gassion.weather.repository.RoleRepository;
 import com.gassion.weather.repository.UserRepository;
 import com.gassion.weather.service.RegisterService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,17 +15,11 @@ import org.springframework.validation.BindingResult;
 import java.util.Arrays;
 
 @Service
+@RequiredArgsConstructor
 public class RegisterServiceImpl implements RegisterService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public RegisterServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     public void saveUserOrSetResult(UserRegisterRequestDTO userRegisterRequestDTO, BindingResult result) {
