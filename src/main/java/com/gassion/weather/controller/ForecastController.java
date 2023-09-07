@@ -6,6 +6,7 @@ import com.gassion.weather.dto.forecast.ToDayForecastDTO;
 import com.gassion.weather.entity.Location;
 import com.gassion.weather.service.ForecastService;
 import com.gassion.weather.service.LocationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,15 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("forecast")
+@RequiredArgsConstructor
 public class ForecastController {
     private final ForecastService forecastService;
     private final LocationService locationService;
-
-    @Autowired
-    public ForecastController(ForecastService forecastService, LocationService locationService) {
-        this.forecastService = forecastService;
-        this.locationService = locationService;
-    }
 
     @GetMapping("/{location_id}")
     public String loadLocationForecast(@PathVariable int location_id, Model model) {

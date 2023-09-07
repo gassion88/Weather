@@ -5,6 +5,7 @@ import com.gassion.weather.service.RegisterService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,13 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class AuthController {
     private final RegisterService registerService;
-
-    @Autowired
-    public AuthController(RegisterService registerService) {
-        this.registerService = registerService;
-    }
 
     @GetMapping("/")
     public String showHomePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {

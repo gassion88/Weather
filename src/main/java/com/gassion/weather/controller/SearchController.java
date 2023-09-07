@@ -5,6 +5,7 @@ import com.gassion.weather.entity.CustomUserPrincipal;
 import com.gassion.weather.entity.Location;
 import com.gassion.weather.entity.User;
 import com.gassion.weather.service.LocationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,13 +20,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/search")
+@RequiredArgsConstructor
 public class SearchController {
     private final LocationService locationService;
-
-    @Autowired
-    public SearchController(LocationService locationService) {
-        this.locationService = locationService;
-    }
 
     @GetMapping
     public String locationSearch(@ModelAttribute("startString") String startString, Model model, @AuthenticationPrincipal UserDetails userDetails) {

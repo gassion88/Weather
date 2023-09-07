@@ -5,6 +5,7 @@ import com.gassion.weather.entity.Location;
 import com.gassion.weather.entity.User;
 import com.gassion.weather.repository.UserRepository;
 import com.gassion.weather.service.LocationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,15 +17,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping("location")
+@RequiredArgsConstructor
 public class LocationController {
     private final LocationService locationService;
     private final UserRepository userRepository;
-
-    @Autowired
-    public LocationController(LocationService locationService, UserRepository userRepository) {
-        this.locationService = locationService;
-        this.userRepository = userRepository;
-    }
 
     @PostMapping("/save")
     public String saveLocation(@ModelAttribute("newLocation") Location location, @AuthenticationPrincipal UserDetails userDetails, @RequestParam("startString") String startString) {
