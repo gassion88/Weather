@@ -7,12 +7,12 @@ import com.gassion.weather.repository.RoleRepository;
 import com.gassion.weather.repository.UserRepository;
 import com.gassion.weather.service.RegisterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +23,9 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public void saveUserOrSetResult(UserRegisterRequestDTO userRegisterRequestDTO, BindingResult result) {
-        User existingUser = findUserByEmail(userRegisterRequestDTO.getEmail());
-        if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
+        Optional<User> optionalUser = findUserByEmail(userRegisterRequestDTO.getEmail());
+
+        if(optionalUser.isPresent()){
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");
             return;
@@ -44,8 +45,8 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email).get();
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     private Role checkRoleExist(){
