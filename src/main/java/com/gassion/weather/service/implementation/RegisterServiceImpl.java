@@ -23,9 +23,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public void saveUserOrSetResult(UserRegisterRequestDTO userRegisterRequestDTO, BindingResult result) {
-        Optional<User> optionalUser = findUserByEmail(userRegisterRequestDTO.getEmail());
-
-        if(optionalUser.isPresent()){
+        if(isEmailAlreadyExists(userRegisterRequestDTO.getEmail())){
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");
             return;
@@ -42,6 +40,10 @@ public class RegisterServiceImpl implements RegisterService {
         }
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);
+    }
+
+    private boolean isEmailAlreadyExists(String email) {
+        return findUserByEmail(email).isPresent();
     }
 
     @Override
