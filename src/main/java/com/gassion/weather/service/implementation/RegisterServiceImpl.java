@@ -30,7 +30,6 @@ public class RegisterServiceImpl implements RegisterService {
         }
 
         User user = buildNewUser(userRegisterRequestDTO);
-
         userRepository.save(user);
     }
 
@@ -45,6 +44,7 @@ public class RegisterServiceImpl implements RegisterService {
             role = checkRoleExist();
         }
         user.setRoles(Arrays.asList(role));
+
         return user;
     }
 
@@ -60,6 +60,7 @@ public class RegisterServiceImpl implements RegisterService {
     private Role checkRoleExist(){
         Role role = new Role();
         role.setName("ROLE_ADMIN");
+
         return roleRepository.save(role);
     }
 }
