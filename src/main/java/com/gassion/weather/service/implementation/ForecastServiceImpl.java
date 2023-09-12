@@ -36,7 +36,7 @@ public class ForecastServiceImpl implements ForecastService {
     private String FORECAST_API_KEY;
 
     private final HttpClient httpClient;
-    
+
     private final ObjectMapper objectMapper;
 
     @Override
