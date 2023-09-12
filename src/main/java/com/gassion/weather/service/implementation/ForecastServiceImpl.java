@@ -69,10 +69,8 @@ public class ForecastServiceImpl implements ForecastService {
     public ToDayForecastDTO getToDayForecast(ForecastApiResponse forecastApiResponse) {
         ToDayForecastDTO toDayForecastDTO = new ToDayForecastDTO();
 
-        Instant instant = Instant.now();
-        ZoneId z = ZoneId.of( "Europe/Moscow" );
-        ZonedDateTime zdt = instant.atZone(z);
-        int currentHour = zdt.getHour();
+
+        int currentHour = getCurrentHourFromZone("Europe/Moscow");
 
         DecimalFormat formatter = new DecimalFormat("00");
         int hoursCount = 0;
@@ -114,5 +112,12 @@ public class ForecastServiceImpl implements ForecastService {
                 "lat=" + lat +
                 "&lon=" + lon +
                 "&extra=true");
+    }
+
+    private int getCurrentHourFromZone(String zoneName) {
+        Instant instant = Instant.now();
+        ZoneId z = ZoneId.of(zoneName);
+        ZonedDateTime zdt = instant.atZone(z);
+        return zdt.getHour();
     }
 }
