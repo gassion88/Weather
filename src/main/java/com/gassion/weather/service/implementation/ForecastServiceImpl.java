@@ -68,34 +68,33 @@ public class ForecastServiceImpl implements ForecastService {
     @Override
     public ToDayForecastDTO getToDayForecast(ForecastApiResponse forecastApiResponse) {
         ToDayForecastDTO toDayForecastDTO = new ToDayForecastDTO();
-
-
         int currentHour = getCurrentHourFromZone("Europe/Moscow");
-
-        DecimalFormat formatter = new DecimalFormat("00");
-        int hoursCount = 0;
+        int forecastHoursCount = 0;
 
         for(Forecast forecastDays : forecastApiResponse.getForecast()) {
-            if(hoursCount == 8) break;
+            if(forecastHoursCount == 8) break;
 
             for(Hour hour : forecastDays.getHours()) {
                 int hourInForecast = Integer.parseInt(hour.getHour());
+                if(forecastHoursCount == 0 && hourInForecast <= currentHour) continue;
 
-                if(hoursCount == 0 && hourInForecast <= currentHour) continue;
+                addForecastToDTO(toDayForecastDTO, hourInForecast, hour.getCondition(), hour.getTemp());
+                forecastHoursCount++;
 
-                   toDayForecastDTO.getHourlyForecast().add(
-                           new ToDayForecastPart(
-                                   formatter.format(hourInForecast) + ":00",
-                                   hour.getCondition(),
-                                   hour.getTemp() + "˚"
-                           ));
-                   hoursCount++;
-
-                if(hoursCount == 8) break;
+                if(forecastHoursCount == 8) break;
             }
         }
 
         return toDayForecastDTO;
+    }
+
+    private void addForecastToDTO(ToDayForecastDTO toDayForecastDTO, int hourInForecast, String condition, int temp) {
+        toDayForecastDTO.getHourlyForecast().add(
+                new ToDayForecastPart(
+                        new DecimalFormat("00").format(hourInForecast) + ":00",
+                        condition,
+                        temp + "˚"
+                ));
     }
 
     private static HttpRequest buildRequestForUriAndApiKey(URI uri, String forecastApiKey) {
