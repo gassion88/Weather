@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gassion.weather.dto.forecast.CurrentWeatherDTO;
 import com.gassion.weather.dto.forecast.ForecastApiResponse;
 import com.gassion.weather.dto.forecast.ToDayForecastDTO;
+import com.gassion.weather.dto.forecast.section.CurrentWeather;
 import com.gassion.weather.dto.forecast.section.Forecast;
 import com.gassion.weather.dto.forecast.section.ToDayForecastPart;
 import com.gassion.weather.dto.forecast.section.parts.Hour;
@@ -52,13 +53,16 @@ public class ForecastServiceImpl implements ForecastService {
 
     @Override
     public CurrentWeatherDTO getCurrentWeather(ForecastApiResponse forecastApiResponse, String locationName) {
+        CurrentWeather currentWeather = forecastApiResponse.getCurrentWeather();
+
         return new CurrentWeatherDTO(
                 locationName,
-                forecastApiResponse.getCurrentWeather().getCondition(),
-                forecastApiResponse.getCurrentWeather().getTemp(), forecastApiResponse.getCurrentWeather().getFeelsLike(),
-                forecastApiResponse.getCurrentWeather().getPressureMM(),
-                forecastApiResponse.getCurrentWeather().getWindSpeed(),
-                forecastApiResponse.getCurrentWeather().getHumidity());
+                currentWeather.getCondition(),
+                currentWeather.getTemp(),
+                currentWeather.getFeelsLike(),
+                currentWeather.getPressureMM(),
+                currentWeather.getWindSpeed(),
+                currentWeather.getHumidity());
     }
 
     @Override
