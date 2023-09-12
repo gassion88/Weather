@@ -45,6 +45,7 @@ public class LocationServiceImpl implements LocationService {
             HttpRequest request = buildRequestForUriAndApiKey(uri, LOCATION_API_KEY);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+
             return objectMapper.readValue(response.body(), new TypeReference<List<LocationResponseFromApiDTO>>() {});
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
@@ -64,8 +65,8 @@ public class LocationServiceImpl implements LocationService {
 
     public void markSavedLocation(List<LocationResponseFromApiDTO> locations, long userId) {
         for (LocationResponseFromApiDTO location : locations) {
-
             Optional<Location> locationOptional = getLocationIfIsSaved(location, userId);
+
             if (locationOptional.isPresent()) {
                 location.setId(locationOptional.get().getId());
                 location.setSaved(true);
