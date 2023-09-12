@@ -29,6 +29,12 @@ public class RegisterServiceImpl implements RegisterService {
             return;
         }
 
+        User user = buildNewUser(userRegisterRequestDTO);
+
+        userRepository.save(user);
+    }
+
+    private User buildNewUser(UserRegisterRequestDTO userRegisterRequestDTO) {
         User user = new User();
         user.setName(userRegisterRequestDTO.getFirstName() + " " + userRegisterRequestDTO.getLastName());
         user.setEmail(userRegisterRequestDTO.getEmail());
@@ -39,7 +45,7 @@ public class RegisterServiceImpl implements RegisterService {
             role = checkRoleExist();
         }
         user.setRoles(Arrays.asList(role));
-        userRepository.save(user);
+        return user;
     }
 
     private boolean isEmailAlreadyExists(String email) {
