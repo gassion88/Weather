@@ -22,6 +22,7 @@ import java.util.List;
 @RequestMapping("/search")
 @RequiredArgsConstructor
 public class SearchController {
+
     private final LocationService locationService;
 
     @GetMapping

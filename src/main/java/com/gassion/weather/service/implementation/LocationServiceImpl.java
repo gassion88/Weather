@@ -25,8 +25,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
+
     private final LocationRepository locationRepository;
+
     private final HttpClient httpClient;
+
     private final ObjectMapper objectMapper;
 
     @Value("${api.location.url}")

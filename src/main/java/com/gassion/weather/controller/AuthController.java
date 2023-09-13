@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
+
     private final RegisterService registerService;
 
     @GetMapping("/")

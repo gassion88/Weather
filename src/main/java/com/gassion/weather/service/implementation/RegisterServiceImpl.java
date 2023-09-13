@@ -17,9 +17,13 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class RegisterServiceImpl implements RegisterService {
+
     private final UserRepository userRepository;
+
     private final RoleRepository roleRepository;
+
     private final PasswordEncoder passwordEncoder;
+
 
     @Override
     public void saveUserOrSetResult(UserRegisterRequestDTO userRegisterRequestDTO, BindingResult result) {

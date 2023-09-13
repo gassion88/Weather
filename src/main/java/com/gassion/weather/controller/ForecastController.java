@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("forecast")
 @RequiredArgsConstructor
 public class ForecastController {
+
     private final ForecastService forecastService;
+
     private final LocationService locationService;
 
     @GetMapping("/{location_id}")

@@ -19,7 +19,9 @@ import java.util.List;
 @RequestMapping("location")
 @RequiredArgsConstructor
 public class LocationController {
+
     private final LocationService locationService;
+
     private final UserRepository userRepository;
 
     @PostMapping("/save")
