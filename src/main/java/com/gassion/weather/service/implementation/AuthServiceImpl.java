@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements UserDetailsService {
+
     private final UserRepository userRepository;
 
     @Override

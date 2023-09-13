@@ -8,10 +8,17 @@ import org.springframework.validation.BindingResult;
 import java.util.List;
 
 public interface LocationService {
+
     List<LocationResponseFromApiDTO> loadByName(String locationName);
+
     void saveUserToLocation(Location newLocation, User user);
+
     void markSavedLocation(List<LocationResponseFromApiDTO> locations, long userId);
+
     void deleteLocationFromId(Integer id);
+
     List<Location> getAllUserLocation(User user);
+
     Location getById(Integer id, BindingResult result);
+
 }

@@ -24,7 +24,6 @@ public class RegisterServiceImpl implements RegisterService {
 
     private final PasswordEncoder passwordEncoder;
 
-
     @Override
     public void saveUserOrSetResult(UserRegisterRequestDTO userRegisterRequestDTO, BindingResult result) {
         if(isEmailAlreadyExists(userRegisterRequestDTO.getEmail())){

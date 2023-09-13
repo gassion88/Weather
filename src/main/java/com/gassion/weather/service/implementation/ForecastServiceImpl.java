@@ -29,6 +29,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ForecastServiceImpl implements ForecastService {
+
     @Value("${api.forecast.url}")
     private String API_URL;
 
