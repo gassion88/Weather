@@ -3,9 +3,10 @@ package com.gassion.weather.service.implementation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gassion.weather.dto.yandex_api.forecast.CurrentWeatherDTO;
-import com.gassion.weather.dto.yandex_api.forecast.ForecastApiResponseDTO;
-import com.gassion.weather.dto.yandex_api.forecast.ToDayForecastDTO;
+import com.gassion.weather.dto.CurrentWeatherDTO;
+import com.gassion.weather.dto.ForecastApiResponseDTO;
+import com.gassion.weather.dto.yandex_api.forecast.YandexApiForecastApiResponseDTO;
+import com.gassion.weather.dto.ToDayForecastDTO;
 import com.gassion.weather.dto.yandex_api.forecast.section.CurrentWeather;
 import com.gassion.weather.dto.yandex_api.forecast.section.Forecast;
 import com.gassion.weather.dto.yandex_api.forecast.section.ToDayForecastPart;
@@ -47,7 +48,7 @@ public class YandexApiForecastServiceImpl implements ForecastService {
             HttpRequest request = buildRequestForUriAndApiKey(uri, FORECAST_API_KEY);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-            return objectMapper.readValue(response.body(), new TypeReference<List<ForecastApiResponseDTO>>() {}).get(0);
+            return objectMapper.readValue(response.body(), new TypeReference<List<YandexApiForecastApiResponseDTO>>() {}).get(0);
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -55,7 +56,7 @@ public class YandexApiForecastServiceImpl implements ForecastService {
 
     @Override
     public CurrentWeatherDTO getCurrentWeather(ForecastApiResponseDTO forecastApiResponseDTO, String locationName) {
-        CurrentWeather currentWeather = forecastApiResponseDTO.getCurrentWeather();
+        CurrentWeather currentWeather = ((YandexApiForecastApiResponseDTO) forecastApiResponseDTO).getCurrentWeather();
 
         return new CurrentWeatherDTO(
                 locationName,
@@ -69,11 +70,12 @@ public class YandexApiForecastServiceImpl implements ForecastService {
 
     @Override
     public ToDayForecastDTO getToDayForecast(ForecastApiResponseDTO forecastApiResponseDTO) {
+        YandexApiForecastApiResponseDTO yandexApiForecastApiResponseDTO = (YandexApiForecastApiResponseDTO) forecastApiResponseDTO;
         ToDayForecastDTO toDayForecastDTO = new ToDayForecastDTO();
         int currentHour = getCurrentHourFromZone("Europe/Moscow");
         int forecastHoursCount = 0;
 
-        for(Forecast forecastDays : forecastApiResponseDTO.getForecast()) {
+        for(Forecast forecastDays : yandexApiForecastApiResponseDTO.getForecast()) {
             if(forecastHoursCount == 8) break;
 
             for(Hour hour : forecastDays.getHours()) {

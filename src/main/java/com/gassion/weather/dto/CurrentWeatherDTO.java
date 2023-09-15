@@ -1,4 +1,4 @@
-package com.gassion.weather.dto.yandex_api.forecast;
+package com.gassion.weather.dto;
 
 import lombok.Data;
 

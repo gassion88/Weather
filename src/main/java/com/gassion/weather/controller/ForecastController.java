@@ -1,8 +1,8 @@
 package com.gassion.weather.controller;
 
-import com.gassion.weather.dto.yandex_api.forecast.CurrentWeatherDTO;
-import com.gassion.weather.dto.yandex_api.forecast.ForecastApiResponseDTO;
-import com.gassion.weather.dto.yandex_api.forecast.ToDayForecastDTO;
+import com.gassion.weather.dto.CurrentWeatherDTO;
+import com.gassion.weather.dto.yandex_api.forecast.YandexApiForecastApiResponseDTO;
+import com.gassion.weather.dto.ToDayForecastDTO;
 import com.gassion.weather.entity.Location;
 import com.gassion.weather.service.ForecastService;
 import com.gassion.weather.service.LocationService;
@@ -26,12 +26,12 @@ public class ForecastController {
     @GetMapping("/{location_id}")
     public String loadLocationForecast(@PathVariable int location_id, Model model) {
         Location location = locationService.getById(location_id, null);
-        ForecastApiResponseDTO forecastApiResponseDTO = forecastService.loadForecastByCoordinates(
+        YandexApiForecastApiResponseDTO yandexApiForecastApiResponseDTO = forecastService.loadForecastByCoordinates(
                 location.getLatitude().toString(),
                 location.getLongitude().toString());
 
-        CurrentWeatherDTO currentWeather = forecastService.getCurrentWeather(forecastApiResponseDTO, location.getName());
-        ToDayForecastDTO toDayForecastDTO = forecastService.getToDayForecast(forecastApiResponseDTO);
+        CurrentWeatherDTO currentWeather = forecastService.getCurrentWeather(yandexApiForecastApiResponseDTO, location.getName());
+        ToDayForecastDTO toDayForecastDTO = forecastService.getToDayForecast(yandexApiForecastApiResponseDTO);
 
         model.addAttribute("current", currentWeather);
         model.addAttribute("forecasts", toDayForecastDTO);
