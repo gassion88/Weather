@@ -30,10 +30,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class YandexApiForecastServiceImpl implements ForecastService {
 
-    @Value("${api.forecast.url}")
+    @Value("${yandex.api.forecast.url}")
     private String API_URL;
 
-    @Value("${api.forecast.key}")
+    @Value("${yandex.api.forecast.key}")
     private String FORECAST_API_KEY;
 
     private final HttpClient httpClient;
