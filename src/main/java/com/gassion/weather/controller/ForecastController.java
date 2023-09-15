@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class ForecastController {
 
-    @Qualifier("openWeatherApiForecastServiceImpl")
     private final ForecastService forecastService;
 
     private final LocationService locationService;
