@@ -1,9 +1,9 @@
-package com.gassion.weather.dto.forecast.section;
+package com.gassion.weather.dto.yandex_api.forecast.section;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.gassion.weather.dto.forecast.section.parts.Hour;
-import com.gassion.weather.dto.forecast.section.parts.PartForecast;
+import com.gassion.weather.dto.yandex_api.forecast.section.parts.Hour;
+import com.gassion.weather.dto.yandex_api.forecast.section.parts.PartForecast;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Forecast {
+
     @JsonProperty("date")
     private String dateTime;
 
@@ -31,4 +32,5 @@ public class Forecast {
 
     @JsonProperty("hours")
     private List<Hour> hours;
+
 }

@@ -1,13 +1,12 @@
 package com.gassion.weather.controller;
 
-import com.gassion.weather.dto.forecast.CurrentWeatherDTO;
-import com.gassion.weather.dto.forecast.ForecastApiResponse;
-import com.gassion.weather.dto.forecast.ToDayForecastDTO;
+import com.gassion.weather.dto.yandex_api.forecast.CurrentWeatherDTO;
+import com.gassion.weather.dto.yandex_api.forecast.ForecastApiResponseDTO;
+import com.gassion.weather.dto.yandex_api.forecast.ToDayForecastDTO;
 import com.gassion.weather.entity.Location;
 import com.gassion.weather.service.ForecastService;
 import com.gassion.weather.service.LocationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +26,12 @@ public class ForecastController {
     @GetMapping("/{location_id}")
     public String loadLocationForecast(@PathVariable int location_id, Model model) {
         Location location = locationService.getById(location_id, null);
-        ForecastApiResponse forecastApiResponse = forecastService.loadForecastByCoordinates(
+        ForecastApiResponseDTO forecastApiResponseDTO = forecastService.loadForecastByCoordinates(
                 location.getLatitude().toString(),
                 location.getLongitude().toString());
 
-        CurrentWeatherDTO currentWeather = forecastService.getCurrentWeather(forecastApiResponse, location.getName());
-        ToDayForecastDTO toDayForecastDTO = forecastService.getToDayForecast(forecastApiResponse);
+        CurrentWeatherDTO currentWeather = forecastService.getCurrentWeather(forecastApiResponseDTO, location.getName());
+        ToDayForecastDTO toDayForecastDTO = forecastService.getToDayForecast(forecastApiResponseDTO);
 
         model.addAttribute("current", currentWeather);
         model.addAttribute("forecasts", toDayForecastDTO);

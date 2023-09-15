@@ -1,6 +1,6 @@
-package com.gassion.weather.dto.forecast;
+package com.gassion.weather.dto.yandex_api.forecast;
 
-import com.gassion.weather.dto.forecast.section.ToDayForecastPart;
+import com.gassion.weather.dto.yandex_api.forecast.section.ToDayForecastPart;
 import lombok.Data;
 
 import java.util.ArrayList;

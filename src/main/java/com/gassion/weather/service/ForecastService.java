@@ -1,15 +1,15 @@
 package com.gassion.weather.service;
 
-import com.gassion.weather.dto.forecast.CurrentWeatherDTO;
-import com.gassion.weather.dto.forecast.ForecastApiResponse;
-import com.gassion.weather.dto.forecast.ToDayForecastDTO;
+import com.gassion.weather.dto.yandex_api.forecast.CurrentWeatherDTO;
+import com.gassion.weather.dto.yandex_api.forecast.ForecastApiResponseDTO;
+import com.gassion.weather.dto.yandex_api.forecast.ToDayForecastDTO;
 
 public interface ForecastService {
 
-    ForecastApiResponse loadForecastByCoordinates(String lot, String lon);
+    ForecastApiResponseDTO loadForecastByCoordinates(String lot, String lon);
 
-    CurrentWeatherDTO getCurrentWeather(ForecastApiResponse forecastApiResponse, String locationName);
+    CurrentWeatherDTO getCurrentWeather(ForecastApiResponseDTO forecastApiResponseDTO, String locationName);
 
-    ToDayForecastDTO getToDayForecast(ForecastApiResponse forecastApiResponse);
+    ToDayForecastDTO getToDayForecast(ForecastApiResponseDTO forecastApiResponseDTO);
 
 }

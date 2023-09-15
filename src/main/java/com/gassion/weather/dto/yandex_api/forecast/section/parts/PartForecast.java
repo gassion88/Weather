@@ -1,4 +1,4 @@
-package com.gassion.weather.dto.forecast.section.parts;
+package com.gassion.weather.dto.yandex_api.forecast.section.parts;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
