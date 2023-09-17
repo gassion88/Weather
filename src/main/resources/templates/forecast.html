@@ -39,36 +39,39 @@
             <div th:text="${current.getTemp()}" class="current__temperature"> Temp</div>
         </div>
 
-        <div class="forecast">
-            <div th:each="forecast : ${forecasts.getHourlyForecast()}" class="forecast__item">
-                <div th:text="${forecast.getTime()}" class="forecast__time"> Time </div>
-                <div th:classappend="${forecast.getCondition()}" class="forecast__icon"></div>
-                <div th:text="${forecast.getTemp()}" class="forecast__temperature"> Temp </div>
+        <div th:if="${forecasts != null}">
+            <div class="forecast">
+                <div th:each="forecast : ${forecasts.getHourlyForecast()}" class="forecast__item">
+                    <div th:text="${forecast.getTime()}" class="forecast__time"> Time </div>
+                    <div th:classappend="${forecast.getCondition()}" class="forecast__icon"></div>
+                    <div th:text="${forecast.getTemp()}" class="forecast__temperature"> Temp </div>
+                </div>
+            </div>
+
+            <div class="details">
+                <div class="details__row">
+                    <div class="details__item feelslike">
+                        <div class="details__name"> Feels Like </div>
+                        <div th:text="${current.getFeelsLike()}" class="details__value"> Feels Like </div>
+                    </div>
+                    <div class="details__item pressure">
+                        <div class="details__name"> Pressure MM </div>
+                        <div th:text="${current.getPressureMM()}" class="details__value"> Pressure MM </div>
+                    </div>
+                </div>
+                <div class="details__row">
+                    <div class="details__item humidity">
+                        <div class="details__name">Wind Speed %</div>
+                        <div th:text="${current.getWindSpeed()}" class="details__value"> Wind Speed % </div>
+                    </div>
+                    <div class="details__item wind">
+                        <div class="details__name"> Humidity m/s </div>
+                        <div th:text="${current.getHumidity()}" class="details__value"> Humidity m/s </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="details">
-            <div class="details__row">
-                <div class="details__item feelslike">
-                    <div class="details__name"> Feels Like </div>
-                    <div th:text="${current.getFeelsLike()}" class="details__value"> Feels Like </div>
-                </div>
-                <div class="details__item pressure">
-                    <div class="details__name"> Pressure MM </div>
-                    <div th:text="${current.getPressureMM()}" class="details__value"> Pressure MM </div>
-                </div>
-            </div>
-            <div class="details__row">
-                <div class="details__item humidity">
-                    <div class="details__name">Wind Speed %</div>
-                    <div th:text="${current.getWindSpeed()}" class="details__value"> Wind Speed % </div>
-                </div>
-                <div class="details__item wind">
-                    <div class="details__name"> Humidity m/s </div>
-                    <div th:text="${current.getHumidity()}" class="details__value"> Humidity m/s </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <script src='js/weather.js'></script>

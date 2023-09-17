@@ -33,10 +33,10 @@ public class ForecastController {
                 location.getLongitude().toString());
 
         CurrentWeatherDTO currentWeather = forecastService.getCurrentWeather(forecastApiResponseDTO, location.getName());
-        ToDayForecastDTO toDayForecastDTO = forecastService.getToDayForecast(forecastApiResponseDTO);
+        //ToDayForecastDTO toDayForecastDTO = forecastService.getToDayForecast(forecastApiResponseDTO);
 
         model.addAttribute("current", currentWeather);
-        model.addAttribute("forecasts", toDayForecastDTO);
+        model.addAttribute("forecasts", null);
         return "forecast";
     }
 }
