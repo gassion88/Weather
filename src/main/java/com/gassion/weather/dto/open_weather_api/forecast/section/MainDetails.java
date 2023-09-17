@@ -15,13 +15,13 @@ public class MainDetails {
     private double temp;
 
     @JsonProperty("feels_like")
-    private double feels_like;
+    private double feelsLike;
 
     @JsonProperty("temp_min")
-    private double temp_min;
+    private double tempMin;
 
     @JsonProperty("temp_max")
-    private double temp_max;
+    private double tempMax;
 
     @JsonProperty("pressure")
     private int pressure;
