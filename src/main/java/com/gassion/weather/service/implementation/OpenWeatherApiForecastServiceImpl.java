@@ -7,8 +7,6 @@ import com.gassion.weather.dto.ForecastApiResponseDTO;
 import com.gassion.weather.dto.CurrentWeatherDTO;
 import com.gassion.weather.dto.open_weather_api.forecast.OpenWeatherForecastApiResponseDTO;
 import com.gassion.weather.dto.ToDayForecastDTO;
-import com.gassion.weather.dto.yandex_api.forecast.YandexApiForecastApiResponseDTO;
-import com.gassion.weather.dto.yandex_api.forecast.section.CurrentWeather;
 import com.gassion.weather.service.ForecastService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,16 +30,13 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
     @Value("${open_weather.api.forecast.key}")
     private String API_ID;
 
-    @Value("${open_weather.api.weather.suffix}")
-    private String SUFFIX;
-
     private final HttpClient httpClient;
 
     private final ObjectMapper objectMapper;
     @Override
     public ForecastApiResponseDTO loadForecastByCoordinates(String lat, String lon) {
         try {
-            URI uri = buildUriForCoordinates(lat, lon);
+            URI uri = buildUri(lat, lon);
             HttpRequest request = buildRequestForUri(uri);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
@@ -64,7 +59,6 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
                 openWeatherResponseDTO.getMainDetails().getPressure(),
                 (int) openWeatherResponseDTO.getWind().getSpeed(),
                 openWeatherResponseDTO.getMainDetails().getHumidity());
-
     }
 
     @Override
@@ -72,12 +66,12 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
         return null;
     }
 
-    private URI buildUriForCoordinates(String lat, String lon) {
+    private URI buildUri(String lat, String lon) {
         return URI.create(
-                API_URL + SUFFIX + "?" +
-                        "lat=" + lat +
-                        "&lon=" + lon +
-                        "&appid=" + API_ID);
+                API_URL +
+                "lat=" + lat +
+                "&lon=" + lon +
+                "&appid=" + API_ID);
     }
 
     private static HttpRequest buildRequestForUri(URI uri) {
