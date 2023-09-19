@@ -13,7 +13,7 @@ import java.util.List;
 public class ListSection {
 
     @JsonProperty("dt")
-    private long id;
+    private long dt;
 
     @JsonProperty("main")
     private MainDetails mainDetails;
