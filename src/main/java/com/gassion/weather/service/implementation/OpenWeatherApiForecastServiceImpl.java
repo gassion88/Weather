@@ -51,14 +51,16 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
     public CurrentWeatherDTO getCurrentWeather(ForecastApiResponseDTO forecastApiResponseDTO, String locationName) {
         OpenWeatherForecastApiResponseDTO openWeatherResponseDTO = (OpenWeatherForecastApiResponseDTO) forecastApiResponseDTO;
 
-        return new CurrentWeatherDTO(
-                locationName,
-                openWeatherResponseDTO.getWeatherCondition().get(0).getMain(),
-                openWeatherResponseDTO.getMainDetails().getTemp(),
-                openWeatherResponseDTO.getMainDetails().getFeelsLike(),
-                openWeatherResponseDTO.getMainDetails().getPressure(),
-                (int) openWeatherResponseDTO.getWind().getSpeed(),
-                openWeatherResponseDTO.getMainDetails().getHumidity());
+        return null;
+
+//        return new CurrentWeatherDTO(
+//                locationName,
+//                openWeatherResponseDTO.getWeatherCondition().get(0).getMain(),
+//                openWeatherResponseDTO.getMainDetails().getTemp(),
+//                openWeatherResponseDTO.getMainDetails().getFeelsLike(),
+//                openWeatherResponseDTO.getMainDetails().getPressure(),
+//                (int) openWeatherResponseDTO.getWind().getSpeed(),
+//                openWeatherResponseDTO.getMainDetails().getHumidity());
     }
 
     @Override
