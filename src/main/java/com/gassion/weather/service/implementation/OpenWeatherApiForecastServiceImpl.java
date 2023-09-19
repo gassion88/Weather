@@ -32,6 +32,9 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
     @Value("${open_weather.api.forecast.key}")
     private String API_ID;
 
+    @Value("${open_weather.api.weather.suffix}")
+    private String SUFFIX;
+
     private final HttpClient httpClient;
 
     private final ObjectMapper objectMapper;
@@ -71,7 +74,7 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
 
     private URI buildUriForCoordinates(String lat, String lon) {
         return URI.create(
-                API_URL +
+                API_URL + SUFFIX + "?" +
                         "lat=" + lat +
                         "&lon=" + lon +
                         "&appid=" + API_ID);
