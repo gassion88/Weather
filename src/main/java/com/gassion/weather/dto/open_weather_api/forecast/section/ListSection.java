@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,7 +19,7 @@ public class ListSection {
     private MainDetails mainDetails;
 
     @JsonProperty("weather")
-    private WeatherCondition weatherCondition;
+    private List<WeatherCondition> weatherCondition;
 
     @JsonProperty("clouds")
     private Clouds clouds;
