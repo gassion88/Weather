@@ -14,43 +14,19 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenWeatherForecastApiResponseDTO extends ForecastApiResponseDTO {
 
-    @JsonProperty("coord")
-    private Coordinates coordinates;
-
-    @JsonProperty("weather")
-    private List<WeatherCondition> weatherCondition;
-
-    @JsonProperty("base")
-    private String base;
-
-    @JsonProperty("main")
-    private MainDetails mainDetails;
-
-    @JsonProperty("visibility")
-    private int visibility;
-
-    @JsonProperty("wind")
-    private Wind wind;
-
-    @JsonProperty("clouds")
-    private Clouds clouds;
-
-    @JsonProperty("dt")
-    private String DT;
-
-    @JsonProperty("sys")
-    private Sys sys;
-
-    @JsonProperty("timezone")
-    private int timezone;
-
-    @JsonProperty("id")
-    private int id;
-
-    @JsonProperty("name")
-    private String name;
-
     @JsonProperty("cod")
-    private int cod;
+    private String cod;
+
+    @JsonProperty("message")
+    private int message;
+
+    @JsonProperty("cnt")
+    private int cnt;
+
+    @JsonProperty("list")
+    private List<ListSection> list;
+
+    @JsonProperty("city")
+    private CitySection city;
 
 }
