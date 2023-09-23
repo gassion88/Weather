@@ -73,7 +73,8 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
             addForecastToDTO(toDayForecastDTO,
                     listSection.getDt_txt().substring(11, 16),
                     listSection.getWeatherCondition().get(0).getMain(),
-                    listSection.getMainDetails().getTemp());
+                    listSection.getMainDetails().getTemp(),
+                    listSection.getWeatherCondition().get(0).getIcon());
         }
         return toDayForecastDTO;
     }

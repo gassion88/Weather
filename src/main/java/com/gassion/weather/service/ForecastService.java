@@ -25,12 +25,13 @@ public interface ForecastService {
         return zdt.getHour();
     }
 
-    default void addForecastToDTO(ToDayForecastDTO toDayForecastDTO, String hourInForecast, String condition, double temp) {
+    default void addForecastToDTO(ToDayForecastDTO toDayForecastDTO, String hourInForecast, String condition, double temp, String icon) {
         toDayForecastDTO.getHourlyForecast().add(
                 new ToDayForecastPart(
                         hourInForecast,
                         condition,
-                        temp + "˚"
+                        temp + "˚",
+                        icon
                 ));
     }
 

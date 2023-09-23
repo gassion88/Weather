@@ -111,69 +111,78 @@ html.transition * {
     background-repeat: no-repeat;
 }
 
-.clear {
-    background-image: url("/img/clear.png");
+._01d {
+    background-image: url("https://openweathermap.org/img/wn/01d@2x.png");
 }
 
-.cloudy {
-    background-image: url("/img/cloudy.png");
+._02d {
+    background-image: url("https://openweathermap.org/img/wn/02d@2x.png");
 }
 
-.hail {
-    background-image: url("/img/hail.png");
+._01n {
+    background-image: url("https://openweathermap.org/img/wn/01n@2x.png");
 }
 
-.heavy-rain {
-    background-image: url("/img/heavy-rain.png");
+._02n {
+    background-image: url("https://openweathermap.org/img/wn/02n@2x.png");
 }
 
-.light-rain {
-    background-image: url("/img/light-snow.png");
+._03d {
+    background-image: url("https://openweathermap.org/img/wn/03d@2x.png");
 }
 
-.light-snow {
-    background-image: url("/img/light-snow.png");
+._03n {
+    background-image: url("https://openweathermap.org/img/wn/03n@2x.png");
 }
 
-.overcast {
-    background-image: url("/img/overcast.png");
+._04d {
+    background-image: url("https://openweathermap.org/img/wn/04d@2x.png");
 }
 
-.partly-cloudy {
-    background-image: url("/img/partly-cloudy.png");
+._04n {
+    background-image: url("https://openweathermap.org/img/wn/04n@2x.png");
 }
 
-.rain {
-    background-image: url("/img/rain.png");
+._09d {
+    background-image: url("https://openweathermap.org/img/wn/09d@2x.png");
 }
 
-.showers {
-    background-image: url("/img/showers.png");
+._09n {
+    background-image: url("https://openweathermap.org/img/wn/09n@2x.png");
 }
 
-.snow {
-    background-image: url("/img/snow.png");
+._10d {
+    background-image: url("https://openweathermap.org/img/wn/10d@2x.png");
 }
 
-.snow-showers {
-    background-image: url("/img/snow-showers.png");
+._10n {
+    background-image: url("https://openweathermap.org/img/wn/10d@2x.png");
 }
 
-.thunderstorm {
-    background-image: url("/img/thunderstorm.png");
+._11d {
+    background-image: url("https://openweathermap.org/img/wn/11d@2x.png");
 }
 
-.thunderstorm-with-hail {
-    background-image: url("/img/thunderstorm-with-hail.png");
+._11n {
+    background-image: url("https://openweathermap.org/img/wn/11n@2x.png");
 }
 
-.thunderstorm-witn-rain {
-    background-image: url("/img/thunderstorm-witn-rain.png");
+._13d {
+    background-image: url("https://openweathermap.org/img/wn/13d@2x.png");
 }
 
-.wet-snow {
-    background-image: url("/img/wet-snow.png");
+._13n {
+    background-image: url("https://openweathermap.org/img/wn/13n@2x.png");
 }
+
+._50d {
+    background-image: url("https://openweathermap.org/img/wn/50d@2x.png");
+}
+
+._50n {
+    background-image: url("https://openweathermap.org/img/wn/50n@2x.png");
+}
+
 /*# sourceMappingURL=main.css.map */
 .close-button {
     /* Reset */
