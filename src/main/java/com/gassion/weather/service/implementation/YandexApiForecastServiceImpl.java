@@ -61,7 +61,7 @@ public class YandexApiForecastServiceImpl implements ForecastService {
         return new CurrentWeatherDTO(
                 locationName,
                 currentWeather.getCondition(),
-                currentWeather.getTemp(),
+                currentWeather.getTemp() + "˚",
                 currentWeather.getFeelsLike(),
                 currentWeather.getPressureMM(),
                 currentWeather.getWindSpeed(),

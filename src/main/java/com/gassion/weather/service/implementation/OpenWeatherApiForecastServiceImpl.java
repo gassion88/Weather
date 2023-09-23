@@ -56,7 +56,7 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
         return new CurrentWeatherDTO(
                 locationName,
                 currentHourWeather.getWeatherCondition().get(0).getMain(),
-                currentHourWeather.getMainDetails().getTemp(),
+                currentHourWeather.getMainDetails().getTemp() + "˚",
                 currentHourWeather.getMainDetails().getFeelsLike(),
                 currentHourWeather.getMainDetails().getPressure(),
                 (int) currentHourWeather.getWind().getSpeed(),
@@ -84,7 +84,8 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
                 API_URL +
                 "lat=" + lat +
                 "&lon=" + lon +
-                "&appid=" + API_ID);
+                "&appid=" + API_ID +
+                "&units=metric");
     }
 
     private static HttpRequest buildRequestForUri(URI uri) {
