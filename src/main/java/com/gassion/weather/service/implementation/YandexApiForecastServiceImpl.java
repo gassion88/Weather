@@ -116,11 +116,4 @@ public class YandexApiForecastServiceImpl implements ForecastService {
                 "&lon=" + lon +
                 "&extra=true");
     }
-
-    private int getCurrentHourFromZone(String zoneName) {
-        Instant instant = Instant.now();
-        ZoneId z = ZoneId.of(zoneName);
-        ZonedDateTime zdt = instant.atZone(z);
-        return zdt.getHour();
-    }
 }

@@ -7,6 +7,7 @@ import com.gassion.weather.dto.ForecastApiResponseDTO;
 import com.gassion.weather.dto.CurrentWeatherDTO;
 import com.gassion.weather.dto.open_weather_api.forecast.OpenWeatherForecastApiResponseDTO;
 import com.gassion.weather.dto.ToDayForecastDTO;
+import com.gassion.weather.dto.open_weather_api.forecast.section.ListSection;
 import com.gassion.weather.service.ForecastService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,17 +51,16 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
     @Override
     public CurrentWeatherDTO getCurrentWeather(ForecastApiResponseDTO forecastApiResponseDTO, String locationName) {
         OpenWeatherForecastApiResponseDTO openWeatherResponseDTO = (OpenWeatherForecastApiResponseDTO) forecastApiResponseDTO;
+        ListSection currentHourWeather = openWeatherResponseDTO.getList().get(0);
 
-        return null;
-
-//        return new CurrentWeatherDTO(
-//                locationName,
-//                openWeatherResponseDTO.getWeatherCondition().get(0).getMain(),
-//                openWeatherResponseDTO.getMainDetails().getTemp(),
-//                openWeatherResponseDTO.getMainDetails().getFeelsLike(),
-//                openWeatherResponseDTO.getMainDetails().getPressure(),
-//                (int) openWeatherResponseDTO.getWind().getSpeed(),
-//                openWeatherResponseDTO.getMainDetails().getHumidity());
+        return new CurrentWeatherDTO(
+                locationName,
+                currentHourWeather.getWeatherCondition().get(0).getMain(),
+                currentHourWeather.getMainDetails().getTemp(),
+                currentHourWeather.getMainDetails().getFeelsLike(),
+                currentHourWeather.getMainDetails().getPressure(),
+                (int) currentHourWeather.getWind().getSpeed(),
+                currentHourWeather.getMainDetails().getHumidity());
     }
 
     @Override
