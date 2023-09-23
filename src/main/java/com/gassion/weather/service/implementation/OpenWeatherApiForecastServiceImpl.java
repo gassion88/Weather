@@ -64,8 +64,18 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
     }
 
     @Override
-    public ToDayForecastDTO getToDayForecast(ForecastApiResponseDTO ForecastApiResponseDTO) {
-        return null;
+    public ToDayForecastDTO getToDayForecast(ForecastApiResponseDTO forecastApiResponseDTO) {
+        OpenWeatherForecastApiResponseDTO openWeatherResponseDTO = (OpenWeatherForecastApiResponseDTO) forecastApiResponseDTO;
+        ToDayForecastDTO toDayForecastDTO = new ToDayForecastDTO();
+
+        for(ListSection listSection : openWeatherResponseDTO.getList().subList(0,8)) {
+
+            addForecastToDTO(toDayForecastDTO,
+                    listSection.getDt_txt().substring(11, 16),
+                    listSection.getWeatherCondition().get(0).getMain(),
+                    listSection.getMainDetails().getTemp());
+        }
+        return toDayForecastDTO;
     }
 
     private URI buildUri(String lat, String lon) {

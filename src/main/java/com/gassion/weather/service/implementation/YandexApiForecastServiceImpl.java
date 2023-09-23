@@ -82,7 +82,7 @@ public class YandexApiForecastServiceImpl implements ForecastService {
                 int hourInForecast = Integer.parseInt(hour.getHour());
                 if(forecastHoursCount == 0 && hourInForecast <= currentHour) continue;
 
-                addForecastToDTO(toDayForecastDTO, hourInForecast, hour.getCondition(), hour.getTemp());
+                //addForecastToDTO(toDayForecastDTO, hourInForecast, hour.getCondition(), hour.getTemp());
                 forecastHoursCount++;
 
                 if(forecastHoursCount == 8) break;
@@ -90,15 +90,6 @@ public class YandexApiForecastServiceImpl implements ForecastService {
         }
 
         return toDayForecastDTO;
-    }
-
-    private void addForecastToDTO(ToDayForecastDTO toDayForecastDTO, int hourInForecast, String condition, int temp) {
-        toDayForecastDTO.getHourlyForecast().add(
-                new ToDayForecastPart(
-                        new DecimalFormat("00").format(hourInForecast) + ":00",
-                        condition,
-                        temp + "˚"
-                ));
     }
 
     private static HttpRequest buildRequestForUriAndApiKey(URI uri, String forecastApiKey) {
