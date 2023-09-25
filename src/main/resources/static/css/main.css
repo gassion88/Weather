@@ -238,3 +238,7 @@ html.transition * {
     border-right: none;
     border-left: none;
 }
+
+.search_body {
+    padding: 10px;
+}
