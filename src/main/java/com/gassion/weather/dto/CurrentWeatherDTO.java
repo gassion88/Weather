@@ -9,6 +9,6 @@ public class CurrentWeatherDTO {
     private final String temp;
     private final double feelsLike;
     private final double pressureMM;
-    private final int windSpeed;
+    private final double windSpeed;
     private final double humidity;
 }

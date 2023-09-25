@@ -59,7 +59,7 @@ public class OpenWeatherApiForecastServiceImpl implements ForecastService {
                 currentHourWeather.getMainDetails().getTemp() + "˚",
                 currentHourWeather.getMainDetails().getFeelsLike(),
                 currentHourWeather.getMainDetails().getPressure(),
-                (int) currentHourWeather.getWind().getSpeed(),
+                currentHourWeather.getWind().getSpeed(),
                 currentHourWeather.getMainDetails().getHumidity());
     }
 
