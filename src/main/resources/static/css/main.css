@@ -1,7 +1,6 @@
 * {
     padding: 0;
     margin: 0;
-    color: #ffffff;
 }
 
 html {
@@ -232,4 +231,10 @@ html.transition * {
     /* Size */
     height: 100%;
     width: 1px;
+}
+
+#startString {
+    border-top: none;
+    border-right: none;
+    border-left: none;
 }
